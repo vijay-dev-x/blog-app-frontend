@@ -1,9 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import Navbar2 from "@/components/Navbar2";
 import Footer2 from "@/components/Footer2";
-import Footer4 from "@/components/Footer4";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster></Toaster>
         <div className=" h-[100vh] w-[100%]  flex flex-col justify-between">
           <div>
             <Navbar2></Navbar2>
             {children}
           </div>
           <div>
-            {/* <Footer3></Footer3> */}
-            {/* <Footer2></Footer2> */}
-            <Footer4></Footer4>
+            <Footer2></Footer2>
           </div>
         </div>
       </body>

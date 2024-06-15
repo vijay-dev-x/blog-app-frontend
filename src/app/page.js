@@ -3,10 +3,8 @@ import AllBlogs from "@/components/AllBlogs";
 import Banner from "@/components/Banner";
 import Banner2 from "@/components/Banner2";
 import Blogs from "@/components/Blogs";
-import Diveder from "@/components/Diveder";
 import Hero2 from "@/components/Hero2";
 import { apiEndPoint } from "@/hooks/strapiApi";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 export default function Page() {

@@ -7,21 +7,24 @@ import SanitizedContent from "@/utility/SanitizeHtml";
 import { Loader } from "lucide-react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
-// export const metadata = {
-//   title: "hlo 2",
-//   description: "Get in touch with us for any inquiries or support.",
-//   keywords: "contact, support, inquiries",
-// };
+import { Metadata } from "next";
 
 export default function Page() {
   const [blogData, setBlogData] = useState(null);
   const { blogId } = useParams();
+  const [metadata, setMetadata] = useState({
+    title: "Loading...",
+    description: "Loading description...",
+  });
 
   const getSingleBlogApi = async () => {
     try {
       const res = await apiEndPoint.get(`blogs/${blogId}/?populate=*`);
       setBlogData(res.data.data);
+      setMetadata({
+        title: res.data.data.attributes.title,
+        description: "hlloo desc",
+      });
     } catch (error) {
       console.log("error", error);
     }
@@ -39,7 +42,6 @@ export default function Page() {
   useEffect(() => {
     if (blogId) {
       getSingleBlogApi();
-      // document.title = "wah bete mauj kardeyyyyy !!!! ";
     }
   }, [blogData]);
 
@@ -56,11 +58,10 @@ export default function Page() {
 
   return (
     <>
-      <Head>
-        <title>hlo 4</title>
-        <meta name="description" content={"hyyy"} />
-        <meta name="keywords" content="contact, support, inquiries" />
-      </Head>
+      <metadata>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+      </metadata>
       {/* <SingleBlogPost></SingleBlogPost> */}
 
       <div className="max-w-7xl p-5 mt-20 mx-auto">

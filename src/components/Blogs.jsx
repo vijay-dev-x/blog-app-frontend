@@ -9,7 +9,7 @@ export default function Blogs({ text, blogData }) {
         <UnderlinedText text={text}></UnderlinedText>
       </h2>
 
-      <div className=" grid grid-cols-1 mt-10 md:grid-cols-2 gap-5">
+      <div className=" grid grid-cols-1 mt-10 md:grid-cols-3 gap-5">
         {blogData?.map((value) => (
           <div key={value.id}>
             <SingleCard2 value={value}></SingleCard2>

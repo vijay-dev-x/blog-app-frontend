@@ -1,27 +1,39 @@
+"use client";
 import React from "react";
 import Head from "next/head";
-export const metadata = {
-  title: "Contact Us - Your Company",
-  description: "Get in touch with us for any inquiries or support.",
-  keywords: "contact, support, inquiries",
-};
+import toast from "react-hot-toast";
+import emailjs from "emailjs-com";
 
 export default function Page() {
+  const sendEmail = (e) => {
+    const toastStart = toast.loading("Sending..");
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_48ai4ab",
+        "template_lo02qbh",
+        e.target,
+        "rBenLhrdhKWQzCKJ4"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          toast.success("Email sent", { id: toastStart });
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error("Something went wrong", { id: toastStart });
+        }
+      );
+  };
   return (
     <div className="min-h-screen mt-20 flex flex-col md:flex-col gap-10 items-center justify-center bg-gray-50 p-4">
-      <Head>
-        <title>Contact Us - Your Company</title>
-        <meta
-          name="description"
-          content="Get in touch with us for any inquiries or support."
-        />
-        <meta name="keywords" content="contact, support, inquiries" />
-      </Head>
       <div className="w-full max-w-2xl p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center text-red-600 mb-6">
           Contact Us
         </h2>
-        <form className="space-y-4">
+        <form onSubmit={sendEmail} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Name

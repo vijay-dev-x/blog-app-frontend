@@ -74,13 +74,13 @@ export default function Navbar2() {
             </button>
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex-shrink-0">
+            <div className=" py-2">
               <Link href="/">
-                <p className="text-xl font-bold">Logo</p>
+                <img src="/logo.png" alt="logo" className=" w-36 h-24" />
               </Link>
             </div>
             <div className="hidden sm:block sm:ml-6">
-              <div className="flex space-x-4">
+              <div className="flex items-center space-x-4">
                 {catagoriesData?.map((Vaule) => (
                   <Link
                     key={Vaule.id}
@@ -90,7 +90,7 @@ export default function Navbar2() {
                       className={`${
                         categoryId === Vaule.attributes.name &&
                         " bg-gray-700 text-white"
-                      } first-letter:capitalize text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                      } first-letter:capitalize text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 mt-8 rounded-md text-sm font-medium`}
                     >
                       {Vaule.attributes.name}
                     </p>
@@ -121,26 +121,16 @@ export default function Navbar2() {
         {(ref) => (
           <div className="sm:hidden" id="mobile-menu">
             <div ref={ref} className="px-2 pt-2 pb-3 space-y-1">
-              <Link href="/category1">
-                <p className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                  Category 1
-                </p>
-              </Link>
-              <Link href="/category2">
-                <p className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                  Category 2
-                </p>
-              </Link>
-              <Link href="/category3">
-                <p className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                  Category 3
-                </p>
-              </Link>
-              <Link href="/signin">
-                <p className="text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                  Sign In
-                </p>
-              </Link>
+              {catagoriesData?.map((Vaule) => (
+                <Link
+                  key={Vaule.id}
+                  href={`/category/${Vaule.attributes.name}`}
+                >
+                  <p className=" first-letter:capitalize text-gray-800 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    {Vaule.attributes.name}
+                  </p>
+                </Link>
+              ))}
             </div>
           </div>
         )}

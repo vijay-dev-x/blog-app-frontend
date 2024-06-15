@@ -10,9 +10,9 @@ export default function Hero2({ heroData }) {
   console.log("img", heroData?.attributes?.img?.data[0].attributes.url);
 
   return (
-    <div className=" mt-20 mb-10 max-w-7xl mx-auto p-5">
+    <div className=" mt-16 mb-10 max-w-7xl mx-auto p-5">
       <div>
-        <h2 className=" text-3xl font-semibold my-5">
+        <h2 className=" text-3xl md:text-2xl font-semibold my-5">
           {heroData?.attributes?.heading}
         </h2>
       </div>
@@ -24,13 +24,10 @@ export default function Hero2({ heroData }) {
             width={300}
             alt="hero loho"
             unoptimized={true}
-            className=" mx-auto rounded-md  object-center object-cover h-[80vh] w-[100%]"
+            className=" mx-auto rounded-md object-center object-cover h-80 md:h-[70vh] w-[100%]"
           ></Image>
         )}
-        <div>
-          {/* <h2 className=" text-3xl font-semibold my-5">
-            {heroData?.attributes?.heading}
-          </h2> */}
+        <div className=" mt-8 text-[16px]">
           <p>{heroData?.attributes?.desc}</p>
         </div>
       </div>
