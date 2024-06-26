@@ -6,12 +6,6 @@ import Link from "next/link";
 export default function SingleCard2({ value }) {
   return (
     <div>
-      {/*
-  Heads up! 👋
-
-  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
-*/}
-
       <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
         <img
           alt=""

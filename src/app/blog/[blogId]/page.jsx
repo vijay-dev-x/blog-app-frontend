@@ -1,30 +1,23 @@
 "use client";
-import generateMetadata from "@/app/generateMetadata";
-import SingleBlogPost from "@/components/SingleBlogPost";
 import { apiEndPoint } from "@/hooks/strapiApi";
-import Head from "next/head";
 import SanitizedContent from "@/utility/SanitizeHtml";
 import { Loader } from "lucide-react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { Metadata } from "next";
 
 export default function Page() {
   const [blogData, setBlogData] = useState(null);
   const { blogId } = useParams();
-  const [metadata, setMetadata] = useState({
-    title: "Loading...",
-    description: "Loading description...",
-  });
+  // const [metadata2, setMetadata2] = useState({
+  //   title: "Loading...",
+  //   description: "Loading description...",
+  // });
 
   const getSingleBlogApi = async () => {
     try {
       const res = await apiEndPoint.get(`blogs/${blogId}/?populate=*`);
       setBlogData(res.data.data);
-      setMetadata({
-        title: res.data.data.attributes.title,
-        description: "hlloo desc",
-      });
+      // console.log("blog page", res.data.data);
     } catch (error) {
       console.log("error", error);
     }
@@ -38,12 +31,13 @@ export default function Page() {
     const formattedTime = date.toLocaleTimeString(undefined, optionsTime);
     return `${formattedDate} at ${formattedTime}`;
   };
+  // use effect--
 
   useEffect(() => {
     if (blogId) {
       getSingleBlogApi();
     }
-  }, [blogData]);
+  }, [blogId]);
 
   if (!blogData) {
     return (
@@ -59,11 +53,9 @@ export default function Page() {
   return (
     <>
       <metadata>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
+        <title>{blogData?.attributes?.metaTitle}</title>
+        <meta name="description" content={blogData?.attributes?.metaDesc} />
       </metadata>
-      {/* <SingleBlogPost></SingleBlogPost> */}
-
       <div className="max-w-7xl p-5 mt-20 mx-auto">
         <div className="flex flex-col gap-3">
           <h2 className="text-4xl font-semibold">
